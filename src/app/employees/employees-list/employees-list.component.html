@@ -1,0 +1,12 @@
+<h4>Employees</h4>  
+<table class="table table-striped">  
+  <tr>  
+    <th>Name</th>  
+    <th>Email</th>  
+  </tr>  
+  <tr *ngFor="let emp of employees" >  <!--(click)="selectEmployee(emp)"-->
+    <td>{{ emp.name }}</td>  
+    <td>{{ emp.email }}</td>  
+  </tr>  
+</table>  
+<br /> 
