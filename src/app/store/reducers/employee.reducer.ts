@@ -3,15 +3,15 @@ import * as EmployeeActions from '../actions';
 import { Employee } from 'src/app/shared/interfaces';
 
 export interface EmployeeState {
-  customers: Employee[];
-  customer: Employee;
+  employees: Employee[];
+  employee: Employee;
   loading: boolean;
   error: boolean;
 }
 
 export const initialState: EmployeeState = {
-  customers: [],
-  customer: null,
+  employees: [],
+  employee: null,
   loading: false,
   error: false
 };
@@ -30,7 +30,7 @@ export function reducer(
       return {
         ...state,
         loading: false,
-        customers: [...state.customers, { ...action.payload }]
+        employees: [...state.employees, { ...action.payload }]
       };
     }
 
@@ -52,7 +52,7 @@ export function reducer(
     case EmployeeActions.GET_EMPLOYEES_SUCCESS: {
       return {
         ...state,
-        customers: action.payload,
+        employees: action.payload,
         loading: false
       };
     }
@@ -71,7 +71,7 @@ export function reducer(
     case EmployeeActions.GET_EMPLOYEE_SUCCESS: {
       return {
         ...state,
-        customer: action.payload,
+        employee: action.payload,
         loading: false
       };
     }
@@ -80,7 +80,7 @@ export function reducer(
       return {
         ...state,
         loading: true,
-        customers: state.customers.filter(h => h !== action.payload)
+        employees: state.employees.filter(h => h !== action.payload)
       };
     }
 
@@ -92,7 +92,7 @@ export function reducer(
     case EmployeeActions.DELETE_EMPLOYEE_ERROR: {
       return {
         ...state,
-        customers: [...state.customers, action.payload.requestData],
+        employees: [...state.employees, action.payload.requestData],
         loading: false
       };
     }
@@ -100,10 +100,10 @@ export function reducer(
     case EmployeeActions.UPDATE_EMPLOYEE: {
       return {
         ...state,
-        customers: state.customers.map(h => {
-          if (h.id === action.payload.id) {
-            state.loading = true;
-          }
+        employees: state.employees.map(h => {
+          // if (h.id === action.payload.id) {
+          //   state.loading = true;
+          // }
           return h;
         })
       };
@@ -117,7 +117,7 @@ export function reducer(
       return {
         ...state,
         loading: false,
-        customers: state.customers.map(h => {
+        employees: state.employees.map(h => {
           if (h.id === action.payload.requestData.id) {
             // Huh? No idea what the error is!
             state.error = true;
@@ -137,14 +137,14 @@ export function reducer(
   return state;
 }
 
-function modifyEmployeeState(customerState: EmployeeState, customerChanges: Partial<Employee>): EmployeeState {
+function modifyEmployeeState(employeeState: EmployeeState, employeeChanges: Partial<Employee>): EmployeeState {
 
   return {
-    ...customerState,
+    ...employeeState,
     loading: false,
-    customers: customerState.customers.map(h => {
-      if (h.id === customerChanges.id) {
-        return { ...h, ...customerChanges };
+    employees: employeeState.employees.map(h => {
+      if (h.id === employeeChanges.id) {
+        return { ...h, ...employeeChanges };
       } else {
         return h;
       }

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { EntityState } from '../store/reducers';
 import { EmployeeSelectors } from '../store/services/employee.selectors';
-import { EmployeeAction } from '../store/actions';
+import { EmployeeAction, GetEmployees } from '../store/actions';
 
 
 
@@ -34,7 +34,7 @@ export class EmployeesComponent implements OnInit {
 
   getEmployees() {
     console.log('Inside test');
-      this.store.dispatch(new EmployeeAction.GetEmployees());
+      this.store.dispatch(new GetEmployees());
 
   }
 

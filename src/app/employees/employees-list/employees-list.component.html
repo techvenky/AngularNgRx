@@ -3,10 +3,12 @@
   <tr>  
     <th>Name</th>  
     <th>Email</th>  
+    <th>&nbsp;</th>
   </tr>  
   <tr *ngFor="let emp of employees" >  <!--(click)="selectEmployee(emp)"-->
     <td>{{ emp.name }}</td>  
     <td>{{ emp.email }}</td>  
+    <td><a [routerLink]="['/employees', emp.id]">Edit</a></td>
   </tr>  
 </table>  
 <br /> 

@@ -19,7 +19,7 @@ export class EmployeesEditComponent implements OnInit, OnDestroy {
   employeeForm = this.formBuilder.group({
     id: [],
     name: ['', Validators.required],
-    city: ['', Validators.required]
+    email: ['', Validators.required]
   });
 
   employee: Employee;
@@ -32,16 +32,14 @@ export class EmployeesEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute) {
-    this.sub = this.employeeSelectors.employee$.subscribe(cust => {
-      if (cust) {
-        this.employee = cust;
+    this.sub = this.employeeSelectors.employee$.subscribe(emp => {
+      if (emp) {
+        this.employee = emp;
         this.employeeForm.patchValue(this.employee);
       }
     });
     this.loading$ = this.employeeSelectors.loading$;
   }
-
-
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -54,7 +52,6 @@ export class EmployeesEditComponent implements OnInit, OnDestroy {
       this.store.dispatch(new EmployeeAction.UpdateEmployee(employeeValue));
       this.router.navigate(['/employees']);
     }
-
   }
 
   add(employee: Employee) {
